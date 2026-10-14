@@ -62,20 +62,20 @@ export function SystemShift() {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
-                    activeMode === "after" ? "bg-accent/10 text-accent" : "bg-neutral-200 text-neutral-600"
+                    activeMode === "after" ? "bg-accent/10 text-accent" : "bg-neutral-200 dark:bg-neutral-800 text-steel"
                   }`}>
                     <item.icon className="h-5 w-5" />
                   </div>
-                  <span className="text-[10px] font-mono text-steel uppercase">
+                  <span className="text-[10px] font-mono text-steel uppercase font-medium">
                     {item.category}
                   </span>
                 </div>
 
                 <div className="min-h-[72px]">
                   {activeMode === "before" ? (
-                    <div className="flex items-start gap-2 text-neutral-600">
-                      <AlertCircle className="h-4 w-4 text-red-500 shrink-0 mt-0.5" />
-                      <p className="text-sm font-medium leading-snug line-through text-neutral-500">
+                    <div className="flex items-start gap-2 text-steel">
+                      <AlertCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                      <p className="text-sm font-medium leading-snug line-through text-steel">
                         {item.before}
                       </p>
                     </div>
@@ -91,8 +91,8 @@ export function SystemShift() {
               </div>
 
               <div className="mt-6 pt-3 border-t border-line text-[11px] font-mono flex items-center justify-between">
-                <span className="text-steel">STATUS</span>
-                <span className={activeMode === "after" ? "text-accent font-bold" : "text-neutral-500"}>
+                <span className="text-steel font-medium">STATUS</span>
+                <span className={activeMode === "after" ? "text-accent font-bold" : "text-steel font-bold"}>
                   {activeMode === "after" ? "RESOLVED" : "BLOCKED"}
                 </span>
               </div>
