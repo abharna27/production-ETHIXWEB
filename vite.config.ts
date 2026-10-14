@@ -1,0 +1,48 @@
+import { defineConfig, type Plugin } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
+import 'dotenv/config'
+import { handleApiRequest } from './src/server/apiHandler.ts'
+
+function neonApiPlugin(): Plugin {
+  return {
+    name: 'neon-api-plugin',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url?.startsWith('/api/')) {
+          try {
+            const handled = await handleApiRequest(req, res);
+            if (handled) return;
+          } catch (err) {
+            console.error('API middleware error:', err);
+          }
+        }
+        next();
+      });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url?.startsWith('/api/')) {
+          try {
+            const handled = await handleApiRequest(req, res);
+            if (handled) return;
+          } catch (err) {
+            console.error('API preview error:', err);
+          }
+        }
+        next();
+      });
+    },
+  };
+}
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss(), neonApiPlugin()],
+  resolve: {
+    alias: {
+      '@': path.resolve(import.meta.dirname, './src'),
+    },
+  },
+})
