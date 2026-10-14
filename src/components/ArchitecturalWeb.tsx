@@ -1,9 +1,7 @@
 import { useState, useRef, useMemo, type MouseEvent } from "react";
-import { motion, useSpring, useMotionValue } from "motion/react";
 import { DollarSign, Layers3, Palette, PhoneCall, TrendingUp } from "lucide-react";
 import spiderwebLight from "../assets/spiderweb-light.svg";
 import spiderwebDark from "../assets/spiderweb.svg";
-import emblemImg from "../assets/emblem-transparent-sm.webp";
 import { InspectorTarget } from "./InspectorTarget";
 
 // Coordinate space matching authentic Ethixweb source (viewBox 1234 x 772)
@@ -91,25 +89,19 @@ export function ArchitecturalWeb() {
   const [hoveredBadge, setHoveredBadge] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 3D Perspective Tilt Physics
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(mouseY, { stiffness: 180, damping: 22 });
-  const rotateY = useSpring(mouseX, { stiffness: 180, damping: 22 });
+  // 3D Perspective Tilt Physics via hardware-accelerated CSS transforms
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x * 14);
-    mouseY.set(y * -14);
+    setTilt({ x: x * 14, y: y * -14 });
   };
 
   const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
+    setTilt({ x: 0, y: 0 });
     setHoveredBadge(null);
   };
 
