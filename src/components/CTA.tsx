@@ -125,7 +125,18 @@ export function CTA() {
         }),
       });
 
-      const data = await res.json();
+      const contentType = res.headers.get("content-type") || "";
+      let data: any = {};
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        throw new Error(
+          res.status >= 500
+            ? "The server is currently initializing or updating. Please try again in a few moments."
+            : `Server returned status ${res.status}`
+        );
+      }
+
       if (!res.ok || !data.success) {
         throw new Error(data.error || "Failed to submit enquiry. Please try again.");
       }
