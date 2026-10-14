@@ -1,5 +1,4 @@
 import { useState, useRef, type ReactNode, type MouseEvent } from "react";
-import { motion, AnimatePresence } from "motion/react";
 
 interface InspectorTargetProps {
   children: ReactNode;
@@ -39,7 +38,6 @@ export function InspectorTarget({
     const centerY = rect.top + rect.height / 2;
 
     if (magnetic) {
-      // Subtle tactile pull within element bounds
       const rawDx = (e.clientX - centerX) * magneticFactor;
       const rawDy = (e.clientY - centerY) * magneticFactor;
       const maxDistance = 14;
@@ -48,7 +46,6 @@ export function InspectorTarget({
       setOffset({ x, y });
     }
 
-    // Keep dimensions updated if responsive
     setDims({
       width: Math.round(rect.width),
       height: Math.round(rect.height),
@@ -57,22 +54,20 @@ export function InspectorTarget({
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    // Fix back to place
     setOffset({ x: 0, y: 0 });
   };
 
   return (
-    <motion.div
+    <div
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{ x: offset.x, y: offset.y }}
-      transition={{
-        type: "spring",
-        stiffness: 380,
-        damping: 24,
-        mass: 0.5,
+      style={{
+        transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
+        transition: isHovered
+          ? "transform 0.08s cubic-bezier(0.25, 1, 0.5, 1)"
+          : "transform 0.35s cubic-bezier(0.23, 1, 0.32, 1)",
       }}
       className={`relative ${
         className.includes("block") || className.includes("flex") ? "" : "inline-block"
@@ -81,43 +76,36 @@ export function InspectorTarget({
       {children}
 
       {/* Figma-style Inspector Overlay on Hover */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.12 }}
-            className="pointer-events-none absolute -inset-[2px] z-40 border border-[#ff3e3e]"
-            aria-hidden="true"
-          >
-            {/* 4 Square Corner Anchor Points */}
-            <span className="absolute -top-[3px] -left-[3px] h-[5px] w-[5px] bg-[#ff3e3e]" />
-            <span className="absolute -top-[3px] -right-[3px] h-[5px] w-[5px] bg-[#ff3e3e]" />
-            <span className="absolute -bottom-[3px] -left-[3px] h-[5px] w-[5px] bg-[#ff3e3e]" />
-            <span className="absolute -bottom-[3px] -right-[3px] h-[5px] w-[5px] bg-[#ff3e3e]" />
+      {isHovered && (
+        <div
+          className="pointer-events-none absolute -inset-[2px] z-40 border border-accent animate-in fade-in duration-100"
+          aria-hidden="true"
+        >
+          {/* 4 Square Corner Anchor Points */}
+          <span className="absolute -top-[3px] -left-[3px] h-[5px] w-[5px] bg-accent" />
+          <span className="absolute -top-[3px] -right-[3px] h-[5px] w-[5px] bg-accent" />
+          <span className="absolute -bottom-[3px] -left-[3px] h-[5px] w-[5px] bg-accent" />
+          <span className="absolute -bottom-[3px] -right-[3px] h-[5px] w-[5px] bg-accent" />
 
-            {/* Red Figma Dimensions Pill Badge (outside above top-left) */}
-            <div
-              style={{
-                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                fontVariationSettings: "normal",
-                letterSpacing: "0.05em",
-                fontSize: "10px",
-                lineHeight: "1",
-                fontWeight: 600,
-                textTransform: "uppercase",
-              }}
-              className="absolute -top-[23px] left-0 flex items-center gap-1.5 whitespace-nowrap rounded-[2px] bg-[#ff3e3e] px-2 py-1 text-white shadow-xs z-50 pointer-events-none select-none"
-            >
-              <span>{tag}</span>
-              <span className="opacity-90">
-                {dims.width}×{dims.height}
-              </span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+          {/* Red Figma Dimensions Pill Badge (outside above top-left) */}
+          <div
+            style={{
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+              letterSpacing: "0.05em",
+              fontSize: "10px",
+              lineHeight: "1",
+              fontWeight: 600,
+              textTransform: "uppercase",
+            }}
+            className="absolute -top-[23px] left-0 flex items-center gap-1.5 whitespace-nowrap rounded-[2px] bg-accent px-2 py-1 text-white shadow-xs z-50 pointer-events-none select-none"
+          >
+            <span>{tag}</span>
+            <span className="opacity-90">
+              {dims.width}×{dims.height}
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
