@@ -117,7 +117,8 @@ export async function handleApiRequest(
           timestamp: new Date().toISOString(),
         });
       } catch (err: any) {
-        sendJson(res, 500, { status: "error", error: err.message });
+        console.error("Health check error:", err);
+        sendJson(res, 500, { status: "error", error: "Database health check failed" });
       }
       return true;
     }
@@ -370,7 +371,7 @@ export async function handleApiRequest(
     console.error("API error:", error);
     sendJson(res, 500, {
       success: false,
-      error: error.message || "Internal server error",
+      error: "An internal server error occurred. Please try again later.",
     });
     return true;
   }
