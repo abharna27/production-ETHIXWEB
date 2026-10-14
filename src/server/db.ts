@@ -1,10 +1,12 @@
 import { neon } from "@neondatabase/serverless";
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgresql://neondb_owner:npg_w4OqA2aYJMGt@ep-floral-mountain-azofd4u2-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require";
+const connectionString = process.env.DATABASE_URL;
 
-export const sql = neon(connectionString);
+export const sql = connectionString
+  ? neon(connectionString)
+  : (((..._args: any[]) => {
+      throw new Error("DATABASE_URL is not configured in environment variables.");
+    }) as unknown as ReturnType<typeof neon>);
 
 export interface LeadRecord {
   id: number;

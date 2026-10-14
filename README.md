@@ -163,8 +163,8 @@ cd ETHIXWEB
 npm install
 
 # 2. Configure Environment (.env)
-DATABASE_URL="postgresql://neondb_owner:npg_w4OqA2aYJMGt@ep-floral-mountain-azofd4u2-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
-ADMIN_PASSCODE="ethix2026admin"
+DATABASE_URL="postgresql://neondb_owner:YOUR_PASSWORD@ep-sample-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+ADMIN_PASSCODE="your_admin_passcode"
 
 # 3. Start development server
 npm run dev
