@@ -85,7 +85,7 @@ function AppContent() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
+  }, [pageSection]);
 
   return (
     <div className={`min-h-screen bg-paper text-ink transition-colors duration-300 ${xray ? "outline-dashed outline-1 outline-accent" : ""}`}>
