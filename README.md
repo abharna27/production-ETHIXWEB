@@ -5,21 +5,35 @@
 
 ---
 
+## 📋 Project Submission Details
+
+| Requirement | Link / Value | Details |
+| :--- | :--- | :--- |
+| **🌐 Live Production URL** | [`https://production-ethixweb.vercel.app/`](https://production-ethixweb.vercel.app/) | Deployed on Vercel with HTTP/2 and 1-year immutable caching |
+| **📦 Public GitHub Repo** | [`https://github.com/abharna27/production-ETHIXWEB`](https://github.com/abharna27/production-ETHIXWEB) | Complete source code, migrations, and architecture documentation |
+| **🔐 Demo Admin Portal** | [`https://production-ethixweb.vercel.app/admin`](https://production-ethixweb.vercel.app/admin) | **Passcode:** `ethix2026admin` |
+| **📱 Mobile PageSpeed** | **90 / 100** Performance · **100** A11y · **100** Best Practices · **100** SEO · **4/4** ARD | Verified in PageSpeed Insights (FCP: 2.1s, LCP: 3.0s, TBT: 0ms, CLS: 0) |
+| **💻 Desktop PageSpeed** | **96 / 100** Performance · **96** A11y · **100** Best Practices · **100** SEO | Verified in PageSpeed Insights (FCP: 0.4s, LCP: 0.5s, TBT: 0ms) |
+
+---
+
 ## Table of Contents
-1. [Production Performance & PageSpeed Audits](#-production-pagespeed-insights--performance-audits)
-2. [Design Rationale](#design-rationale)
-   - [2.1 What Makes It India-Specific](#21-what-makes-it-india-specific)
-   - [2.2 What We Improved Over the Current Site](#22-what-we-improved-over-the-current-site)
-3. [Inner Pages Architecture](#inner-pages-architecture)
+1. [Submission Highlights](#-project-submission-details)
+2. [Production Performance & PageSpeed Audits](#-production-pagespeed-insights--performance-audits)
+3. [Design Rationale](#design-rationale)
+   - [3.1 What Makes It India-Specific](#31-what-makes-it-india-specific)
+   - [3.2 What We Improved Over the Current Site](#32-what-we-improved-over-the-current-site)
+4. [Inner Pages Architecture](#inner-pages-architecture)
    - [Services (`/services`)](#services-services)
    - [About India Story (`/about`)](#about-the-india-story-about)
    - [Contact Desk (`/contact`)](#contact-consultation-desk-contact)
    - [Protected Admin Portal (`/admin`)](#protected-admin-portal-admin)
-4. [Backend, Database & Security](#backend-database--security)
+5. [Backend, Database & Security](#backend-database--security)
    - [Database Schema (Neon PostgreSQL)](#database-schema-neon-postgresql)
    - [Spam Protection & Validation Engine](#spam-protection--validation-engine)
    - [Vite Unified API Middleware](#vite-unified-api-middleware)
-5. [Tech Stack & Getting Started](#tech-stack--getting-started)
+6. [Tech Stack & Architecture](#tech-stack--architecture)
+7. [Local Development Setup](#local-development-setup)
 
 ---
 
@@ -56,7 +70,7 @@ Verified on live production deployment: [`https://production-ethixweb.vercel.app
 
 ## Design Rationale
 
-### 1.1 What Makes It India-Specific
+### 3.1 What Makes It India-Specific
 
 Ethixweb originated as an engineering practice in Kent / Seattle, Washington (USA). As part of its international expansion into India's premier tech corridor (Bangalore, Karnataka), this digital redesign articulates a distinct narrative that goes beyond conventional outsourced agencies:
 
@@ -70,7 +84,7 @@ Ethixweb originated as an engineering practice in Kent / Seattle, Washington (US
    - Ethixweb's India story addresses this with a direct **Comparison Matrix** (`Ethixweb vs. Traditional Agency`):
      - *Zero Junior Outsourcing*: Clients collaborate directly with the senior architects and engineers who write the code.
      - *Clean Code Foundations*: Modern bespoke React and TypeScript; zero page builders, zero brittle plugins.
-     - *Performance Guarantee*: Sub-800ms Time-to-Interactive, perfect Core Web Vitals, and PageSpeed 98+.
+     - *Performance Guarantee*: Sub-second Time-to-Interactive, perfect Core Web Vitals, and PageSpeed 90+.
 
 3. **Dual-Currency Commercials (INR ₹ & USD $)**:
    - The `/services` page features an interactive currency switcher enabling Indian businesses to view transparent pricing brackets in Indian Rupees (INR ₹ with GST alignment) while allowing international clients to evaluate transparent US Dollar ($ USD) tiers.
@@ -83,7 +97,7 @@ Ethixweb originated as an engineering practice in Kent / Seattle, Washington (US
 
 ---
 
-### 1.2 What We Improved Over the Current Site
+### 3.2 What We Improved Over the Current Site
 
 Comparing this build against the original website (`ethixweb-site-main`), the following structural, aesthetic, and functional leaps were made:
 
@@ -97,6 +111,7 @@ Comparing this build against the original website (`ethixweb-site-main`), the fo
 | **Lead Generation & Form** | Static or mock form without verified persistence. | **Working Neon PostgreSQL Engine**: Validated API endpoints (`/api/leads`) with RFC 5322 regex, sanitized inputs, and real-time reference ID generation. |
 | **Spam Defense** | Basic client-side required fields. | **Triple-Layer Bot Armor**: Invisible CSS honeypot, millisecond submission speed threshold detection (`< 1200ms`), and in-memory IP rate limiting (`max 5 per 10 min`). |
 | **Lead Management** | None. Leads sent to an inbox or lost. | **Protected Admin CRM (`/admin`)**: Passkey-authenticated management console with live KPI metrics, status updates (`new`, `contacted`, `qualified`, `closed`, `archived`), full-text search, filtering, and 1-click CSV export. |
+| **Performance Engineering** | Unoptimized asset delivery with render-blocking font chains and lazy LCP images. | **Sub-Second Performance**: Preloaded LCP spiderweb SVG, self-hosted immutable woff2 fonts, decoupled non-critical bundles, and deferred below-the-fold mounting. |
 
 ---
 
@@ -123,7 +138,8 @@ Comparing this build against the original website (`ethixweb-site-main`), the fo
 - **Live Form Submission**: Submits directly to Neon PostgreSQL with validation feedback and unique inquiry reference numbers.
 
 ### Protected Admin Portal (`/admin`)
-- **Passkey Authentication**: Secure passcode barrier (default: `ethix2026admin`) with session token verification.
+- **Access URL**: [`https://production-ethixweb.vercel.app/admin`](https://production-ethixweb.vercel.app/admin)
+- **Demo Passcode**: `ethix2026admin`
 - **Live Database Telemetry**: Real-time Neon PostgreSQL connection status check (`/api/health`).
 - **Pipeline KPI Cards**: Instant tally of Total Inquiries, New Leads, In Discussion, and Converted Clients.
 - **Full Management Toolkit**:
@@ -178,31 +194,48 @@ The backend runs as a custom Vite plugin (`neonApiPlugin()`) located in `src/ser
 
 ---
 
-## Tech Stack & Getting Started
+## Tech Stack & Architecture
 
-- **Framework**: React 18 + TypeScript + Vite
-- **Styling**: Tailwind CSS + Custom CSS Architecture (`index.css`)
-- **Animation**: Framer Motion (`motion/react`)
-- **Database**: Serverless Neon PostgreSQL (`@neondatabase/serverless`)
-- **Icons**: Lucide React
-- **Routing**: React Router DOM v7
+- **Core Framework**: React 18, TypeScript, Vite
+- **Styling & Design System**: Tailwind CSS v4, Custom Swiss Architectural CSS (`index.css`)
+- **Typography (100% Self-Hosted with Immutable Caching)**:
+  - *Bricolage Grotesque* (Architectural display headings)
+  - *Space Grotesk* (Clean technical body typography)
+  - *IBM Plex Mono* (Engineering readouts, coordinates, telemetry)
+  - *Caveat* (Editorial margin annotations)
+- **Animation & Transitions**:
+  - Framer Motion (`motion/react`) for 8-phase interactive build sequence
+  - Hardware-accelerated CSS transforms (`translate3d`, `perspective`) for interactive 3D spiderweb tilt
+  - Custom SVG clipPath expansion for smooth circular page curtain transitions
+- **Database & Persistence**: Serverless Neon PostgreSQL via `@neondatabase/serverless` connection pooler
+- **Agentic AI & Discovery**:
+  - Full conformance with Agent Resource Discovery standard (`.well-known/ai-catalog.json` & `.well-known/ard.json`)
+  - Semantic Schema.org JSON-LD graph (`WebSite` & `ProfessionalService`)
+- **Hosting & Edge Delivery**:
+  - Hosted on Vercel Edge with HTTP/2 and HTTP/3
+  - 1-Year Immutable Caching (`Cache-Control: public, max-age=31536000, immutable`) for fonts and SVGs
 
-### Local Setup
+---
+
+## Local Development Setup
 
 ```bash
-# 1. Install dependencies
-cd ETHIXWEB
+# 1. Clone the repository
+git clone https://github.com/abharna27/production-ETHIXWEB.git
+cd production-ETHIXWEB
+
+# 2. Install dependencies
 npm install
 
-# 2. Configure Environment (.env)
+# 3. Configure Environment (.env)
 DATABASE_URL="postgresql://neondb_owner:YOUR_PASSWORD@ep-sample-pooler.c-3.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
-ADMIN_PASSCODE="your_admin_passcode"
+ADMIN_PASSCODE="ethix2026admin"
 
-# 3. Start development server
+# 4. Start local development server (includes API middleware)
 npm run dev
 
-# 4. Verify TypeScript compilation
-npx tsc -b
+# 5. Build for production & verify TypeScript types
+npm run build
 ```
 
-Visit `http://localhost:5173/` for the landing page, `/services` for the catalog, `/about` for the India story, `/contact` for the enquiry desk, and `/admin` for the leads dashboard (Passcode: `ethix2026admin`).
+Visit `http://localhost:5173/` for the landing page, `/services` for the catalog, `/about` for the India story, `/contact` for the consultation desk, and `/admin` for the leads dashboard (Demo Passcode: `ethix2026admin`).
