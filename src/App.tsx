@@ -40,37 +40,22 @@ function ScrollToTop() {
 
 function AppContent() {
   const [xray, setXray] = useState(false);
-  const [activeSection, setActiveSection] = useState("Intro");
-  const location = useLocation();
+  const pageSection =
+    location.pathname === "/services"
+      ? "Services"
+      : location.pathname === "/about"
+      ? "India Story"
+      : location.pathname === "/contact"
+      ? "Contact"
+      : location.pathname === "/admin"
+      ? "Admin CRM"
+      : null;
+
+  const [scrollSection, setScrollSection] = useState("Intro");
+  const activeSection = pageSection || scrollSection;
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (xray) {
-      root.setAttribute("data-theme", "dark");
-      root.classList.add("xray");
-    } else {
-      root.removeAttribute("data-theme");
-      root.classList.remove("xray");
-    }
-  }, [xray]);
-
-  useEffect(() => {
-    if (location.pathname === "/services") {
-      setActiveSection("Services");
-      return;
-    }
-    if (location.pathname === "/about") {
-      setActiveSection("India Story");
-      return;
-    }
-    if (location.pathname === "/contact") {
-      setActiveSection("Contact");
-      return;
-    }
-    if (location.pathname === "/admin") {
-      setActiveSection("Admin CRM");
-      return;
-    }
+    if (pageSection) return;
 
     const sections = [
       { id: "overview", label: "Intro" },
@@ -91,7 +76,7 @@ function AppContent() {
           const top = el.offsetTop;
           const height = el.offsetHeight;
           if (scrollY >= top && scrollY < top + height) {
-            setActiveSection(section.label);
+            setScrollSection(section.label);
             break;
           }
         }
