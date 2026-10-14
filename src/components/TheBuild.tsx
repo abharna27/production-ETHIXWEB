@@ -1116,7 +1116,7 @@ export function TheBuild() {
               >
                 <g clipPath="url(#hero-reveal-clip)">
                   <image
-                    href="/images/lens_red_dot.jpg"
+                    href="/images/lens_red_dot.webp"
                     x="490"
                     y="88"
                     width="362"
