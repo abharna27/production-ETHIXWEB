@@ -250,16 +250,23 @@ export function CTA() {
 
               {/* What is it about? */}
               <div>
-                <label className="block text-sm font-semibold text-ink mb-3">
+                <label id={`${formId}-scope-label`} className="block text-sm font-semibold text-ink mb-3">
                   What is it about?
                 </label>
-                <div className="flex flex-wrap gap-2">
+                <div
+                  className="flex flex-wrap gap-2"
+                  role="group"
+                  aria-labelledby={`${formId}-scope-label`}
+                >
                   {SCOPE_OPTIONS.map((scope) => {
                     const isSelected = selectedScopes.includes(scope);
                     return (
                       <button
                         key={scope}
                         type="button"
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        aria-label={`Select scope: ${scope}`}
                         onClick={() => toggleScope(scope)}
                         className={`rounded-full border px-4 py-2 text-xs font-mono transition-all cursor-pointer select-none ${
                           isSelected
@@ -316,16 +323,23 @@ export function CTA() {
 
               {/* Budget Chips */}
               <div>
-                <label className="block text-sm font-semibold text-ink mb-3">
+                <label id={`${formId}-budget-label`} className="block text-sm font-semibold text-ink mb-3">
                   Budget
                 </label>
-                <div className="flex flex-wrap gap-2">
+                <div
+                  className="flex flex-wrap gap-2"
+                  role="radiogroup"
+                  aria-labelledby={`${formId}-budget-label`}
+                >
                   {BUDGET_OPTIONS.map((opt) => {
                     const isSelected = budget === opt;
                     return (
                       <button
                         key={opt}
                         type="button"
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Select budget: ${opt}`}
                         onClick={() => setBudget(opt)}
                         className={`rounded-full border px-4 py-2 text-xs font-mono transition-all cursor-pointer select-none ${
                           isSelected
@@ -342,16 +356,23 @@ export function CTA() {
 
               {/* Timing Chips */}
               <div>
-                <label className="block text-sm font-semibold text-ink mb-3">
+                <label id={`${formId}-timing-label`} className="block text-sm font-semibold text-ink mb-3">
                   Timing
                 </label>
-                <div className="flex flex-wrap gap-2">
+                <div
+                  className="flex flex-wrap gap-2"
+                  role="radiogroup"
+                  aria-labelledby={`${formId}-timing-label`}
+                >
                   {TIMING_OPTIONS.map((opt) => {
                     const isSelected = timing === opt;
                     return (
                       <button
                         key={opt}
                         type="button"
+                        role="radio"
+                        aria-checked={isSelected}
+                        aria-label={`Select timing: ${opt}`}
                         onClick={() => setTiming(opt)}
                         className={`rounded-full border px-4 py-2 text-xs font-mono transition-all cursor-pointer select-none ${
                           isSelected
