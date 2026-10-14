@@ -175,9 +175,10 @@ export function Navbar({ xray, toggleXray, activeSection = "Intro" }: NavbarProp
 
   // Handle escape key
   useEffect(() => {
+    if (!menuOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && menuOpen) {
-        handleCloseMenu();
+      if (e.key === "Escape") {
+        setMenuOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
