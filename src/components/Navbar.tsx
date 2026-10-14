@@ -331,6 +331,7 @@ export function Navbar({ xray, toggleXray, activeSection = "Intro" }: NavbarProp
                   type="button"
                   onClick={toggleXray}
                   title="Toggle architectural X-ray"
+                  aria-label="Toggle architectural blueprint X-ray mode"
                   aria-pressed={xray}
                   className={`flex items-center gap-1.5 text-xs sm:text-sm font-medium tracking-tight transition-colors cursor-pointer ${
                     xray
