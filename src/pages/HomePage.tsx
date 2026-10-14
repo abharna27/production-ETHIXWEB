@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Hero } from "../components/Hero";
+import { DeferredSection } from "../components/DeferredSection";
 
 const TheBuild = lazy(() => import("../components/TheBuild").then((m) => ({ default: m.TheBuild })));
 const Stance = lazy(() => import("../components/Stance").then((m) => ({ default: m.Stance })));
@@ -15,17 +16,59 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <Suspense fallback={null}>
-        <TheBuild />
-        <Stance />
-        <Services />
-        <SelectedWork />
-        <GlobalNetwork />
-        <Proof />
-        <SystemShift />
-        <FAQ />
-        <CTA />
-      </Suspense>
+      <DeferredSection id="the-build" minHeight="500px">
+        <Suspense fallback={null}>
+          <TheBuild />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection minHeight="400px">
+        <Suspense fallback={null}>
+          <Stance />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection id="services" minHeight="500px">
+        <Suspense fallback={null}>
+          <Services />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection id="work" minHeight="500px">
+        <Suspense fallback={null}>
+          <SelectedWork />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection id="network" minHeight="400px">
+        <Suspense fallback={null}>
+          <GlobalNetwork />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection id="reviews" minHeight="400px">
+        <Suspense fallback={null}>
+          <Proof />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection minHeight="400px">
+        <Suspense fallback={null}>
+          <SystemShift />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection id="faq" minHeight="400px">
+        <Suspense fallback={null}>
+          <FAQ />
+        </Suspense>
+      </DeferredSection>
+
+      <DeferredSection id="cta" minHeight="400px">
+        <Suspense fallback={null}>
+          <CTA />
+        </Suspense>
+      </DeferredSection>
     </>
   );
 }
