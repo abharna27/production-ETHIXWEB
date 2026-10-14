@@ -61,15 +61,6 @@ export function InspectorTarget({
     setOffset({ x: 0, y: 0 });
   };
 
-  const isTouch = typeof window !== "undefined" && window.matchMedia && !window.matchMedia("(hover: hover)").matches;
-  if (isTouch) {
-    return (
-      <div className={`relative ${className.includes("block") || className.includes("flex") ? "" : "inline-block"} ${className}`}>
-        {children}
-      </div>
-    );
-  }
-
   return (
     <motion.div
       ref={containerRef}
