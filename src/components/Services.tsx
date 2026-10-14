@@ -90,6 +90,8 @@ export function Services() {
                         src={bgImg}
                         alt=""
                         aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
                         className={`h-full w-full object-cover object-center transition-all duration-700 ease-[var(--ease-lens)] ${
                           isExpanded
                             ? "scale-105 opacity-100 filter-none"

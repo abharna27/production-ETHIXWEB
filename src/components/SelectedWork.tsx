@@ -96,7 +96,10 @@ export function SelectedWork() {
                     <img
                       src={study.image}
                       alt={study.client}
+                      width={1024}
+                      height={768}
                       loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover object-top transition-transform duration-[1200ms] ease-[var(--ease-lens)] group-hover:scale-105"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-paper-2/40 via-transparent to-transparent opacity-60" />

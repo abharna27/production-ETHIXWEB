@@ -200,6 +200,10 @@ export function ArchitecturalWeb() {
               alt=""
               aria-hidden="true"
               draggable={false}
+              width={1234}
+              height={772}
+              loading="eager"
+              decoding="async"
               className="dark:hidden h-full w-full object-contain select-none opacity-90 transition-opacity duration-300"
               style={{
                 filter: "drop-shadow(0 0 2px rgba(192,36,42,0.22)) drop-shadow(0 0 10px rgba(192,36,42,0.08))",
@@ -211,6 +215,10 @@ export function ArchitecturalWeb() {
               alt=""
               aria-hidden="true"
               draggable={false}
+              width={1234}
+              height={772}
+              loading="eager"
+              decoding="async"
               className="hidden dark:block h-full w-full object-contain select-none opacity-90 transition-opacity duration-300"
               style={{
                 filter: "drop-shadow(0 0 4px rgba(255,62,62,0.30)) drop-shadow(0 0 20px rgba(255,62,62,0.15))",
@@ -324,8 +332,11 @@ export function ArchitecturalWeb() {
               <img
                 src={emblemImg}
                 alt="Ethixweb Hub Emblem"
-                className="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-[0_4px_14px_rgba(255,62,62,0.45)]"
+                width={48}
+                height={48}
                 loading="eager"
+                decoding="async"
+                className="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-[0_4px_14px_rgba(255,62,62,0.45)]"
               />
             </div>
           </div>

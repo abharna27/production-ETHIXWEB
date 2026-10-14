@@ -580,6 +580,10 @@ export function Navbar({ xray, toggleXray, activeSection = "Intro" }: NavbarProp
                         <img
                           src={MENU_ITEMS[hoveredIndex].image}
                           alt={MENU_ITEMS[hoveredIndex].label}
+                          width={600}
+                          height={400}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover object-top"
                         />
                         {/* Soft architectural vignette */}
