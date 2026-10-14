@@ -500,7 +500,7 @@ export function CTA() {
                 <span className="font-mono text-[10px] uppercase tracking-wider text-steel block">
                   Draft
                 </span>
-                <span className="font-mono text-3xl font-bold text-steel/60">
+                <span className="font-mono text-3xl font-bold text-steel">
                   {String(progressPercent).padStart(3, "0")}%
                 </span>
               </div>

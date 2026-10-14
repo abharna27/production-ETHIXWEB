@@ -1437,9 +1437,9 @@ export function TheBuild() {
             <span className="w-6 h-px bg-line" />
             <span className="text-steel">{currentPhase.total}</span>
           </div>
-          <h3 className="font-display text-[26px] sm:text-[32px] font-bold tracking-tight text-ink mb-1">
+          <h2 className="font-display text-[26px] sm:text-[32px] font-bold tracking-tight text-ink mb-1">
             {currentPhase.title}
-          </h3>
+          </h2>
           <p className="font-sans text-[13px] sm:text-[14.5px] text-steel leading-relaxed">
             {currentPhase.desc}
           </p>

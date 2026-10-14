@@ -150,14 +150,10 @@ export function Rulers({ activeSection = "Intro" }: RulersProps) {
       </aside>
 
       {/* Right Vertical Ruler (Interactive Draggable Scrollbar Track) */}
-      <aside
+      <div
         ref={rightRulerRef}
-        role="scrollbar"
+        role="region"
         aria-label="Architectural ruler scrollbar"
-        aria-controls="overview"
-        aria-valuenow={Math.round(scrollProgress * 100)}
-        aria-valuemin={0}
-        aria-valuemax={100}
         onPointerDown={handlePointerDown}
         className="fixed right-0 top-0 bottom-0 z-40 select-none w-6 sm:w-10 md:w-12 cursor-pointer transition-opacity duration-300 touch-none"
       >
@@ -223,7 +219,7 @@ export function Rulers({ activeSection = "Intro" }: RulersProps) {
             />
           </div>
         </div>
-      </aside>
+      </div>
     </>
   );
 }

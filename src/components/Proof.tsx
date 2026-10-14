@@ -87,7 +87,7 @@ export function Proof() {
                 <p className="font-display font-semibold text-sm text-ink">{review.author}</p>
                 <p className="text-xs font-mono text-steel">Verified Client · {review.date}</p>
               </div>
-              <div className="flex items-center gap-1 text-xs font-mono text-emerald-600">
+              <div className="flex items-center gap-1 text-xs font-mono text-emerald-800 dark:text-emerald-400 font-medium">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 <span>Verified</span>
               </div>

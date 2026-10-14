@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agentic-resource-discovery.org/schemas/v1/catalog.json",
+  "name": "Ethixweb",
+  "description": "Full-stack digital operations, AI workflows, and architectural engineering.",
+  "version": "1.0.0",
+  "homepage": "https://www.ethixweb.com",
+  "entries": [
+    {
+      "id": "leads-enquiry",
+      "name": "Submit Project Brief",
+      "description": "Submit a client project brief or enquiry directly to Ethixweb engineering team.",
+      "type": "api",
+      "endpoint": "https://www.ethixweb.com/api/leads",
+      "method": "POST",
+      "schema": {
+        "type": "openapi",
+        "description": "JSON payload with name, email, phone, services, budget, timing, description"
+      }
+    },
+    {
+      "id": "telemetry-health",
+      "name": "Telemetry Health Check",
+      "description": "Query public operational health of backend serverless services and database availability.",
+      "type": "api",
+      "endpoint": "https://www.ethixweb.com/api/health",
+      "method": "GET"
+    }
+  ]
+}

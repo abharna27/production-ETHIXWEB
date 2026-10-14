@@ -185,7 +185,7 @@ export function ArchitecturalWeb() {
               AUTONOMOUS SPIDERWEB
             </span>
           </div>
-          <span className="text-[10px] uppercase tracking-widest text-steel/80">
+          <span className="text-[10px] uppercase tracking-widest text-steel font-semibold">
             SYSTEMS HUB
           </span>
         </div>

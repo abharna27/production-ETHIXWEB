@@ -22,11 +22,11 @@
   --paper: #f4f4f2;
   --paper-2: #e9e9e6;
   --ink: #121214;
-  --ink-2: #4a4a50;
-  --steel: #62626a;
+  --ink-2: #38383e;
+  --steel: #4b4b52;
   --line: rgba(18, 18, 20, 0.12);
-  --accent: #ff3e3e;
-  --accent-deep: #c62828;
+  --accent: #c81e1e;
+  --accent-deep: #a81818;
 
   --shell: clamp(1.25rem, 5vw, 5rem);
   --nav-h: 4.5rem;

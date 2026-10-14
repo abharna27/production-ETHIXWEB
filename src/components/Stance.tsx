@@ -39,7 +39,7 @@ export function Stance() {
       <div className="mt-20 md:mt-28 grid gap-x-12 gap-y-12 md:grid-cols-2 lg:grid-cols-4">
         {PRINCIPLES.map((principle, idx) => (
           <div key={principle.title} className="rule pt-5 relative group">
-            <span className="measure text-steel/60 font-mono block mb-2">
+            <span className="measure text-steel font-medium font-mono block mb-2">
               0{idx + 1}
             </span>
             <h3 className="display-4 text-ink group-hover:text-accent transition-colors">
