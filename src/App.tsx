@@ -1,14 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Rulers } from "./components/Rulers";
 import { PageCurtain } from "./components/PageCurtain";
 import { HomePage } from "./pages/HomePage";
-import { ServicesPage } from "./pages/ServicesPage";
-import { AboutIndiaPage } from "./pages/AboutIndiaPage";
-import { ContactPage } from "./pages/ContactPage";
-import { AdminPage } from "./pages/AdminPage";
+
+const ServicesPage = lazy(() => import("./pages/ServicesPage").then((m) => ({ default: m.ServicesPage })));
+const AboutIndiaPage = lazy(() => import("./pages/AboutIndiaPage").then((m) => ({ default: m.AboutIndiaPage })));
+const ContactPage = lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
+const AdminPage = lazy(() => import("./pages/AdminPage").then((m) => ({ default: m.AdminPage })));
+
+function PageFallback() {
+  return (
+    <div className="min-h-[70vh] flex items-center justify-center">
+      <div className="h-6 w-6 rounded-full border-2 border-accent border-t-transparent animate-spin" />
+    </div>
+  );
+}
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -120,14 +129,16 @@ function AppContent() {
 
       {/* Main Content Sections via Router */}
       <main id="main-content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/about" element={<AboutIndiaPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="*" element={<HomePage />} />
-        </Routes>
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/about" element={<AboutIndiaPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
+        </Suspense>
       </main>
 
       {/* Footer */}
