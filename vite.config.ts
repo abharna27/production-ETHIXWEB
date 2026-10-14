@@ -35,6 +35,8 @@ function neonApiPlugin(): Plugin {
       });
     },
   };
+}
+
 function asyncCssPlugin(): Plugin {
   return {
     name: 'async-css-plugin',
