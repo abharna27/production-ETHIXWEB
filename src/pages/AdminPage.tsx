@@ -35,8 +35,13 @@ export function AdminPage() {
   const checkHealth = useCallback(async () => {
     try {
       const res = await fetch("/api/health");
-      const data = await res.json();
-      setDbStatus(data);
+      const contentType = res.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        const data = await res.json();
+        setDbStatus(data);
+      } else {
+        setDbStatus({ status: "offline", dbAlive: false });
+      }
     } catch {
       setDbStatus({ status: "offline", dbAlive: false });
     }
@@ -59,6 +64,11 @@ export function AdminPage() {
           "x-admin-key": passcode || token,
         },
       });
+
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        return;
+      }
 
       const data = await res.json();
       if (data.success && Array.isArray(data.leads)) {
@@ -97,15 +107,26 @@ export function AdminPage() {
         body: JSON.stringify({ passcode }),
       });
 
-      const data = await res.json();
+      const contentType = res.headers.get("content-type") || "";
+      let data: any = {};
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        throw new Error(
+          res.status >= 500
+            ? "Server is currently initializing or updating. Please try again shortly."
+            : `Server returned status ${res.status}`
+        );
+      }
+
       if (res.ok && data.success) {
         setToken(data.token);
         sessionStorage.setItem("ethix_admin_token", data.token);
       } else {
-        setAuthError(data.message || "Invalid passcode");
+        setAuthError(data.message || data.error || "Invalid passcode");
       }
-    } catch {
-      setAuthError("Failed to reach backend server");
+    } catch (err: any) {
+      setAuthError(err.message || "Failed to reach backend server");
     } finally {
       setAuthLoading(false);
     }
