@@ -1,9 +1,17 @@
 import "dotenv/config";
 import { neon } from "@neondatabase/serverless";
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgresql://placeholder:placeholder@localhost:5432/placeholder";
+const rawUrl = process.env.DATABASE_URL;
+
+export const isDbConfigured = Boolean(
+  rawUrl &&
+  !rawUrl.includes("placeholder") &&
+  rawUrl.startsWith("postgres")
+);
+
+const connectionString = isDbConfigured
+  ? rawUrl!
+  : "postgresql://placeholder:placeholder@localhost:5432/placeholder";
 
 export const sql = neon(connectionString);
 
