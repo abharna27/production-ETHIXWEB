@@ -167,7 +167,7 @@ export function CTA() {
       <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
         {/* Left Column: Form Sections */}
         <div className="lg:col-span-7 space-y-14">
-          <form id={formId} onSubmit={handleSubmit} className="space-y-14">
+          <form id={formId} action="/api/leads" method="POST" onSubmit={handleSubmit} aria-label="Project Brief Enquiry Form" className="space-y-14">
             {/* 01 About you */}
             <div className="space-y-6">
               <div className="flex items-center gap-3 pb-3 border-b border-line">
