@@ -1,31 +1,27 @@
-import { lazy, Suspense } from "react";
 import { Hero } from "../components/Hero";
-
-const TheBuild = lazy(() => import("../components/TheBuild").then((m) => ({ default: m.TheBuild })));
-const Stance = lazy(() => import("../components/Stance").then((m) => ({ default: m.Stance })));
-const Services = lazy(() => import("../components/Services").then((m) => ({ default: m.Services })));
-const SelectedWork = lazy(() => import("../components/SelectedWork").then((m) => ({ default: m.SelectedWork })));
-const GlobalNetwork = lazy(() => import("../components/GlobalNetwork").then((m) => ({ default: m.GlobalNetwork })));
-const Proof = lazy(() => import("../components/Proof").then((m) => ({ default: m.Proof })));
-const SystemShift = lazy(() => import("../components/SystemShift").then((m) => ({ default: m.SystemShift })));
-const FAQ = lazy(() => import("../components/FAQ").then((m) => ({ default: m.FAQ })));
-const CTA = lazy(() => import("../components/CTA").then((m) => ({ default: m.CTA })));
+import { TheBuild } from "../components/TheBuild";
+import { Stance } from "../components/Stance";
+import { Services } from "../components/Services";
+import { SelectedWork } from "../components/SelectedWork";
+import { GlobalNetwork } from "../components/GlobalNetwork";
+import { Proof } from "../components/Proof";
+import { SystemShift } from "../components/SystemShift";
+import { FAQ } from "../components/FAQ";
+import { CTA } from "../components/CTA";
 
 export function HomePage() {
   return (
     <>
       <Hero />
-      <Suspense fallback={null}>
-        <TheBuild />
-        <Stance />
-        <Services />
-        <SelectedWork />
-        <GlobalNetwork />
-        <Proof />
-        <SystemShift />
-        <FAQ />
-        <CTA />
-      </Suspense>
+      <TheBuild />
+      <Stance />
+      <Services />
+      <SelectedWork />
+      <GlobalNetwork />
+      <Proof />
+      <SystemShift />
+      <FAQ />
+      <CTA />
     </>
   );
 }
