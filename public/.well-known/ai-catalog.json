@@ -1,26 +1,28 @@
 {
-  "$schema": "https://agentic-resource-discovery.org/schemas/v1/catalog.json",
   "specVersion": "1.0",
-  "name": "Ethixweb",
-  "description": "Full-stack digital operations, AI workflows, and architectural engineering.",
-  "version": "1.0.0",
-  "homepage": "https://www.ethixweb.com",
+  "host": {
+    "displayName": "Ethixweb",
+    "documentationUrl": "https://www.ethixweb.com/",
+    "logoUrl": "https://www.ethixweb.com/favicon.svg"
+  },
   "entries": [
     {
-      "id": "leads-enquiry",
-      "name": "Submit Project Brief",
-      "description": "Submit a client project brief or enquiry directly to Ethixweb engineering team.",
-      "type": "api",
+      "identifier": "urn:air:ethixweb:operations:lead-submission",
+      "displayName": "Submit Project Brief",
+      "type": "application/json",
       "url": "https://www.ethixweb.com/api/leads",
-      "method": "POST"
+      "description": "Submit a client project brief or enquiry directly to Ethixweb engineering team.",
+      "tags": ["contact", "brief", "leads"],
+      "capabilities": ["LeadCapture", "BriefSubmission"]
     },
     {
-      "id": "telemetry-health",
-      "name": "Telemetry Health Check",
-      "description": "Query public operational health of backend serverless services and database availability.",
-      "type": "api",
+      "identifier": "urn:air:ethixweb:telemetry:health",
+      "displayName": "Telemetry Health Check",
+      "type": "application/json",
       "url": "https://www.ethixweb.com/api/health",
-      "method": "GET"
+      "description": "Query operational health of backend serverless services and database availability.",
+      "tags": ["health", "monitoring", "status"],
+      "capabilities": ["HealthCheck", "ServiceStatus"]
     }
   ]
 }
