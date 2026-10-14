@@ -360,8 +360,8 @@ export async function handleApiRequest(
     }
 
     // 5. PATCH /api/leads/:id (Protected Admin Route)
-    const patchMatch = pathname.match(/^\/api\/leads\/(\d+)$/);
-    if (patchMatch && method === "PATCH") {
+    const patchIdStr = pathname.match(/^\/api\/leads\/(\d+)$/)?.[1] || (req as any).query?.id || urlObj.searchParams.get("id");
+    if (patchIdStr && method === "PATCH" && pathname.startsWith("/api/leads")) {
       if (!verifyAdmin(req)) {
         sendJson(res, 401, { success: false, error: "Unauthorized." });
         return true;
@@ -372,7 +372,7 @@ export async function handleApiRequest(
         return true;
       }
 
-      const leadId = parseInt(patchMatch[1], 10);
+      const leadId = parseInt(String(patchIdStr), 10);
       const body = await getJsonBody(req);
       const { status } = body;
 
@@ -401,8 +401,8 @@ export async function handleApiRequest(
     }
 
     // 6. DELETE /api/leads/:id (Protected Admin Route)
-    const deleteMatch = pathname.match(/^\/api\/leads\/(\d+)$/);
-    if (deleteMatch && method === "DELETE") {
+    const deleteIdStr = pathname.match(/^\/api\/leads\/(\d+)$/)?.[1] || (req as any).query?.id || urlObj.searchParams.get("id");
+    if (deleteIdStr && method === "DELETE" && pathname.startsWith("/api/leads")) {
       if (!verifyAdmin(req)) {
         sendJson(res, 401, { success: false, error: "Unauthorized." });
         return true;
@@ -413,7 +413,7 @@ export async function handleApiRequest(
         return true;
       }
 
-      const leadId = parseInt(deleteMatch[1], 10);
+      const leadId = parseInt(String(deleteIdStr), 10);
       const deleted = await sql`
         DELETE FROM leads 
         WHERE id = ${leadId}
