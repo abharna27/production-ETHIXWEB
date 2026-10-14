@@ -359,6 +359,11 @@ export async function handleApiRequest(
         return true;
       }
 
+      if (!isDbConfigured) {
+        sendJson(res, 503, { success: false, error: "Database configuration is pending." });
+        return true;
+      }
+
       const leadId = parseInt(patchMatch[1], 10);
       const body = await getJsonBody(req);
       const { status } = body;
@@ -392,6 +397,11 @@ export async function handleApiRequest(
     if (deleteMatch && method === "DELETE") {
       if (!verifyAdmin(req)) {
         sendJson(res, 401, { success: false, error: "Unauthorized." });
+        return true;
+      }
+
+      if (!isDbConfigured) {
+        sendJson(res, 503, { success: false, error: "Database configuration is pending." });
         return true;
       }
 
