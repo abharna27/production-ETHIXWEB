@@ -156,14 +156,13 @@ export function ArchitecturalWeb() {
 
   return (
     <InspectorTarget tag="Spiderweb" magneticFactor={0.06} className="w-full">
-      <motion.div
+      <div
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
-          rotateX,
-          rotateY,
-          transformPerspective: 1200,
+          transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+          transition: "transform 0.15s cubic-bezier(0.23, 1, 0.32, 1)",
         }}
         className="relative rounded-2xl border border-[#dcdad3] dark:border-line bg-white/70 dark:bg-paper-2/20 p-5 sm:p-7 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-xl backdrop-blur-xs select-none overflow-hidden"
       >
@@ -322,13 +321,14 @@ export function ArchitecturalWeb() {
             {/* Rotating 3D Glass Emblem */}
             <div className="group relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl border border-accent/70 bg-white/95 dark:bg-[#18181b]/95 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-110">
               <img
-                src={emblemImg}
+                src="/emblem.webp"
                 alt="Ethixweb Hub Emblem"
                 width={48}
-                height={48}
+                height={50}
                 loading="eager"
+                fetchPriority="high"
                 decoding="async"
-                className="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-[0_4px_14px_rgba(255,62,62,0.45)]"
+                className="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-[0_4px_14px_rgba(200,30,30,0.45)]"
               />
             </div>
           </div>
@@ -378,7 +378,7 @@ export function ArchitecturalWeb() {
           </span>
           <span className="text-accent font-medium">100% OPERATIONAL</span>
         </div>
-      </motion.div>
+      </div>
     </InspectorTarget>
   );
 }

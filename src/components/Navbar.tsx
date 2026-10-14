@@ -4,7 +4,6 @@ import { Search, X, ArrowUpRight } from "lucide-react";
 import { BRAND } from "../content/landing";
 import { InspectorTarget } from "./InspectorTarget";
 import { triggerProjectTransition } from "./PageCurtain";
-import emblemImg from "../assets/emblem-transparent-sm.webp";
 
 interface NavbarProps {
   xray: boolean;

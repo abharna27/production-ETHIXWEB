@@ -3,4 +3,3 @@ Allow: /
 Disallow: /api/
 
 Sitemap: https://www.ethixweb.com/sitemap_index.xml
-Agentmap: https://www.ethixweb.com/.well-known/ai-catalog.json
