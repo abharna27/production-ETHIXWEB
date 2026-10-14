@@ -6,20 +6,18 @@ import { ArchitecturalWeb } from "./ArchitecturalWeb";
 import { triggerProjectTransition } from "./PageCurtain";
 
 export function Hero() {
-  // Blur reveal animation variant for initial page load
+  // Smooth GPU-composited glide animation for initial page load
   const blurReveal: Variants = {
     hidden: {
-      opacity: 0,
-      x: -36,
-      filter: "blur(14px)",
+      opacity: 0.85,
+      y: 16,
     },
     visible: (custom: number = 0) => ({
       opacity: 1,
-      x: 0,
-      filter: "blur(0px)",
+      y: 0,
       transition: {
-        duration: 0.85,
-        delay: 0.12 + custom * 0.12,
+        duration: 0.65,
+        delay: custom * 0.08,
         ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       },
     }),

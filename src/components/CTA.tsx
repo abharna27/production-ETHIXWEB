@@ -177,10 +177,12 @@ export function CTA() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
+                  <label htmlFor={`${formId}-name`} className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
                     Name *
                   </label>
                   <input
+                    id={`${formId}-name`}
+                    name="name"
                     type="text"
                     required
                     value={name}
@@ -191,10 +193,12 @@ export function CTA() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
+                  <label htmlFor={`${formId}-email`} className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
                     Email *
                   </label>
                   <input
+                    id={`${formId}-email`}
+                    name="email"
                     type="email"
                     required
                     value={email}
@@ -205,10 +209,12 @@ export function CTA() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
+                  <label htmlFor={`${formId}-company`} className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
                     Company
                   </label>
                   <input
+                    id={`${formId}-company`}
+                    name="company"
                     type="text"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
@@ -218,10 +224,12 @@ export function CTA() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
+                  <label htmlFor={`${formId}-phone`} className="block text-xs font-mono uppercase tracking-wider text-steel mb-2">
                     Phone *
                   </label>
                   <input
+                    id={`${formId}-phone`}
+                    name="phone"
                     type="tel"
                     required
                     value={phone}
@@ -269,10 +277,12 @@ export function CTA() {
 
               {/* Existing website */}
               <div>
-                <label className="block text-sm font-semibold text-ink mb-2">
+                <label htmlFor={`${formId}-website`} className="block text-sm font-semibold text-ink mb-2">
                   Existing website
                 </label>
                 <input
+                  id={`${formId}-website`}
+                  name="website"
                   type="text"
                   value={existingWebsite}
                   onChange={(e) => setExistingWebsite(e.target.value)}
@@ -286,10 +296,12 @@ export function CTA() {
 
               {/* Tell me about it */}
               <div>
-                <label className="block text-sm font-semibold text-ink mb-2">
+                <label htmlFor={`${formId}-description`} className="block text-sm font-semibold text-ink mb-2">
                   Tell us about it *
                 </label>
                 <textarea
+                  id={`${formId}-description`}
+                  name="description"
                   required
                   rows={4}
                   value={description}

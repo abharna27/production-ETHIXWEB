@@ -1,0 +1,30 @@
+# Ethixweb
+
+> Premium Digital Operations, AI Automation & Web Architecture Agency.
+> "We run the tech. You run the business."
+
+Ethixweb (registered as Ethixweb USA LLC in Wyoming, United States) manages full-stack digital operations for growing businesses. Specializing in high-performance web architecture, AI voice/chat receptionists, CRM synchronization, SEO engineering, and paid acquisition.
+
+## Core Capabilities & Services
+
+- **Web Architecture & Redesign**: Headless modern React architectures, sub-second load times, Core Web Vitals 95+, bespoke architectural aesthetics.
+- **AI Booking & Reception Agents**: Autonomous voice and chat agents handling 24/7 inbound enquiries, calendar bookings, and CRM synchronizations.
+- **CRM & Pipeline Synchronization**: Multi-channel pipeline synchronization connecting websites, forms, and ad channels directly into Hubspot, Salesforce, or custom databases.
+- **SEO & Organic Ranking**: Technical SEO, structured data integration, page speed optimization, and high-intent local/global search authority.
+- **Paid Acquisition & Ads**: High-conversion Google Ads and Meta campaigns connected to end-to-end attribution analytics.
+- **24/7 Digital Operations & Maintenance**: Dedicated engineering pods providing continuous uptime monitoring, security patching, and iterative feature development.
+
+## Key Pages & Endpoints
+
+- [Homepage](https://www.ethixweb.com/): Overview, architectural 8-phase process ("The Build"), case studies, and client proof.
+- [Services Catalog](https://www.ethixweb.com/services): Comprehensive list of all 22 engineering capabilities with scope and pricing details.
+- [About Ethixweb](https://www.ethixweb.com/about): The US to India expansion story (Seattle craft + Bangalore engineering scale).
+- [Contact & Project Brief Desk](https://www.ethixweb.com/contact): Fast-lane inquiry desk and 30-minute consultation scheduler.
+- [API Health](https://www.ethixweb.com/api/health): Public telemetry status of backend serverless services and database availability.
+
+## Contact Information
+
+- **Legal Entity**: Ethixweb USA LLC (Wyoming, USA)
+- **Email**: info@ethixweb.com
+- **Hours**: Monday to Friday · 9:00 AM - 5:00 PM PST
+- **Booking**: https://calendly.com/ethixweb-agency/30min
