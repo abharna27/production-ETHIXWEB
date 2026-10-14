@@ -1,6 +1,6 @@
 import "dotenv/config";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { sql } from "./db.js";
+import { sql, isDbConfigured } from "./db.js";
 
 // Rate limiting state: IP -> timestamps
 const ipSubmissions = new Map<string, number[]>();
@@ -87,8 +87,26 @@ export async function handleApiRequest(
   res: ServerResponse
 ): Promise<boolean> {
   const urlObj = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
-  const pathname = urlObj.pathname;
+  let pathname = urlObj.pathname;
   const method = req.method?.toUpperCase();
+
+  // Support Vercel query path if present (e.g. from [...path].ts)
+  const queryPath = (req as any).query?.path;
+  if (Array.isArray(queryPath) && queryPath.length > 0) {
+    pathname = `/${queryPath.join("/")}`;
+  } else if (typeof queryPath === "string" && queryPath.trim()) {
+    pathname = `/${queryPath.trim()}`;
+  }
+
+  // Normalize path to always begin with /api
+  if (!pathname.startsWith("/api")) {
+    pathname = `/api${pathname.startsWith("/") ? "" : "/"}${pathname}`;
+  }
+
+  // Normalize trailing slash (e.g. /api/leads/ -> /api/leads)
+  if (pathname.length > 5 && pathname.endsWith("/")) {
+    pathname = pathname.slice(0, -1);
+  }
 
   // Handle CORS Preflight
   if (method === "OPTIONS") {
@@ -101,14 +119,20 @@ export async function handleApiRequest(
     return true;
   }
 
-  // Only handle /api/* routes
-  if (!pathname.startsWith("/api/")) {
-    return false;
-  }
-
   try {
     // 1. GET /api/health
     if (pathname === "/api/health" && method === "GET") {
+      if (!isDbConfigured) {
+        sendJson(res, 200, {
+          status: "unconfigured",
+          database: "neon_postgresql",
+          dbAlive: false,
+          warning: "DATABASE_URL is not set in environment variables.",
+          timestamp: new Date().toISOString(),
+        });
+        return true;
+      }
+
       try {
         const dbRes = await sql`SELECT 1 as alive;`;
         sendJson(res, 200, {
@@ -119,7 +143,14 @@ export async function handleApiRequest(
         });
       } catch (err: any) {
         console.error("Health check error:", err);
-        sendJson(res, 500, { status: "error", error: "Database health check failed" });
+        sendJson(res, 200, {
+          status: "error",
+          database: "neon_postgresql",
+          dbAlive: false,
+          error: "Database health check failed",
+          details: err?.message || String(err),
+          timestamp: new Date().toISOString(),
+        });
       }
       return true;
     }
@@ -238,6 +269,14 @@ export async function handleApiRequest(
       const cleanCountry = (country || "India / Global").trim();
       const cleanSource = (source || "website_enquiry").trim();
 
+      if (!isDbConfigured) {
+        sendJson(res, 503, {
+          success: false,
+          error: "Database configuration is pending. Please contact the administrator.",
+        });
+        return true;
+      }
+
       const inserted = await sql`
         INSERT INTO leads (
           name, email, phone, company, website, services, budget, timing, description, source, country, status
@@ -261,6 +300,16 @@ export async function handleApiRequest(
     if (pathname === "/api/leads" && method === "GET") {
       if (!verifyAdmin(req)) {
         sendJson(res, 401, { success: false, error: "Unauthorized access to admin leads." });
+        return true;
+      }
+
+      if (!isDbConfigured) {
+        sendJson(res, 200, {
+          success: true,
+          count: 0,
+          leads: [],
+          warning: "Database is not configured. Please add DATABASE_URL in Vercel settings.",
+        });
         return true;
       }
 
