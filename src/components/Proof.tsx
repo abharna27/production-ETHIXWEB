@@ -26,11 +26,11 @@ export function Proof() {
         {/* Trustpilot Score Badge Card */}
         <div className="flex items-center gap-4 rounded-2xl border border-line bg-paper-2/60 p-4 px-6 shadow-xs">
           <div>
-            <div className="flex items-center gap-1 text-emerald-600 mb-1">
+            <div className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 mb-1">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`h-4 w-4 ${i < 4 ? "fill-emerald-600 text-emerald-600" : "fill-neutral-300 text-neutral-300"}`}
+                  className={`h-4 w-4 ${i < 4 ? "fill-emerald-700 text-emerald-700 dark:fill-emerald-400 dark:text-emerald-400" : "fill-neutral-300 dark:fill-neutral-700 text-neutral-300 dark:text-neutral-700"}`}
                 />
               ))}
             </div>

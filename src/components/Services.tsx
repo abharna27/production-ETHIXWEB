@@ -267,7 +267,7 @@ export function Services() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-line flex items-center justify-between text-xs font-mono text-steel">
-                  <span className="flex items-center gap-1.5 text-emerald-600 font-medium">
+                  <span className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-400 font-medium">
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     Production Ready
                   </span>
