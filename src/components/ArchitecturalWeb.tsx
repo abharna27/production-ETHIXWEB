@@ -1,7 +1,5 @@
 import { useState, useRef, useMemo, type MouseEvent } from "react";
 import { DollarSign, Layers3, Palette, PhoneCall, TrendingUp } from "lucide-react";
-import spiderwebLight from "../assets/spiderweb-light.svg";
-import spiderwebDark from "../assets/spiderweb.svg";
 import { InspectorTarget } from "./InspectorTarget";
 
 // Coordinate space matching authentic Ethixweb source (viewBox 1234 x 772)
@@ -187,13 +185,14 @@ export function ArchitecturalWeb() {
           <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
             {/* Light Mode Artwork */}
             <img
-              src={spiderwebLight}
+              src="/spiderweb-light.svg"
               alt=""
               aria-hidden="true"
               draggable={false}
               width={1234}
               height={772}
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
               decoding="async"
               className="dark:hidden h-full w-full object-contain select-none opacity-90 transition-opacity duration-300"
               style={{
@@ -202,7 +201,7 @@ export function ArchitecturalWeb() {
             />
             {/* Dark / X-ray Mode Artwork */}
             <img
-              src={spiderwebDark}
+              src="/spiderweb.svg"
               alt=""
               aria-hidden="true"
               draggable={false}
