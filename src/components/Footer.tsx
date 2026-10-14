@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Building2, Clock, Mail } from "lucide-react";
 import { BRAND, SOCIAL_LINKS } from "../content/landing";
+import emblemImg from "../assets/emblem-transparent-sm.webp";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -11,9 +12,24 @@ export function Footer() {
       <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 pb-16 border-b border-line">
         {/* Left Column: Brand & Mission */}
         <div className="lg:col-span-5">
-          <a href="#overview" className="inline-block text-2xl font-bold font-display text-ink tracking-tight mb-4">
-            {BRAND.name}
-            <span className="text-accent">.</span>
+          <a
+            href="#overview"
+            className="inline-flex items-center gap-2.5 text-2xl font-bold font-display text-ink tracking-tight mb-4 group"
+            aria-label="Ethixweb top"
+          >
+            <img
+              src={emblemImg}
+              alt="Ethixweb logo"
+              className="h-7 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              width={28}
+              height={31}
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="flex items-center">
+              <span>{BRAND.name}</span>
+              <span className="text-accent ml-0.5">.</span>
+            </span>
           </a>
           <p className="max-w-sm text-sm text-ink-2 leading-relaxed">
             Revamp your online operations with bespoke engineering crafted for your business growth. We run the tech. You run the business.

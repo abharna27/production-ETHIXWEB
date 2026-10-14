@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Search, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { BRAND } from "../content/landing";
 import { InspectorTarget } from "./InspectorTarget";
 import { triggerProjectTransition } from "./PageCurtain";
+import emblemImg from "../assets/emblem-transparent-sm.webp";
 
 interface NavbarProps {
   xray: boolean;
@@ -233,11 +234,22 @@ export function Navbar({ xray, toggleXray, activeSection = "Intro" }: NavbarProp
               <InspectorTarget tag="Brand" magneticFactor={0.12}>
                 <Link
                   to="/"
-                  className="flex items-center text-lg sm:text-xl font-bold tracking-tight text-ink select-none font-display"
+                  className="flex items-center gap-2 text-lg sm:text-xl font-bold tracking-tight text-ink select-none font-display group"
                   aria-label="Ethixweb home"
                 >
-                  <span>{BRAND.name}</span>
-                  <span className="text-accent ml-0.5">.</span>
+                  <img
+                    src={emblemImg}
+                    alt="Ethixweb logo"
+                    className="h-6 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                    width={24}
+                    height={27}
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <span className="flex items-center">
+                    <span>{BRAND.name}</span>
+                    <span className="text-accent ml-0.5">.</span>
+                  </span>
                 </Link>
               </InspectorTarget>
 

@@ -108,10 +108,10 @@ export function Rulers({ activeSection = "Intro" }: RulersProps) {
 
   return (
     <>
-      {/* Left Vertical Ruler (Static Reference Scale) */}
+      {/* Left Vertical Ruler (Static Reference Scale - hidden on mobile for clean breathing room) */}
       <aside
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 bottom-0 z-30 select-none w-10 sm:w-12 overflow-hidden opacity-60 dark:opacity-75 transition-opacity duration-300"
+        className="pointer-events-none fixed left-0 top-0 bottom-0 z-30 select-none hidden md:block w-10 sm:w-12 overflow-hidden opacity-60 dark:opacity-75 transition-opacity duration-300"
       >
         <svg
           className="h-full w-full"
@@ -159,7 +159,7 @@ export function Rulers({ activeSection = "Intro" }: RulersProps) {
         aria-valuemin={0}
         aria-valuemax={100}
         onPointerDown={handlePointerDown}
-        className="fixed right-0 top-0 bottom-0 z-40 select-none w-10 sm:w-12 cursor-pointer transition-opacity duration-300 touch-none"
+        className="fixed right-0 top-0 bottom-0 z-40 select-none w-6 sm:w-10 md:w-12 cursor-pointer transition-opacity duration-300 touch-none"
       >
         {/* Ruler Ticks */}
         <svg
