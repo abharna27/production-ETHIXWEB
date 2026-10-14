@@ -202,7 +202,7 @@ export function ArchitecturalWeb() {
               draggable={false}
               width={1234}
               height={772}
-              loading="eager"
+              loading="lazy"
               decoding="async"
               className="dark:hidden h-full w-full object-contain select-none opacity-90 transition-opacity duration-300"
               style={{
@@ -217,7 +217,7 @@ export function ArchitecturalWeb() {
               draggable={false}
               width={1234}
               height={772}
-              loading="eager"
+              loading="lazy"
               decoding="async"
               className="hidden dark:block h-full w-full object-contain select-none opacity-90 transition-opacity duration-300"
               style={{
