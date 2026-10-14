@@ -53,7 +53,15 @@ export default defineConfig({
           (dep) =>
             !dep.includes('vendor-motion') &&
             !dep.includes('TheBuild') &&
-            !dep.includes('ArchitecturalMenu')
+            !dep.includes('ArchitecturalMenu') &&
+            !dep.includes('Stance') &&
+            !dep.includes('Services') &&
+            !dep.includes('SelectedWork') &&
+            !dep.includes('GlobalNetwork') &&
+            !dep.includes('Proof') &&
+            !dep.includes('SystemShift') &&
+            !dep.includes('FAQ') &&
+            !dep.includes('CTA')
         );
       },
     },

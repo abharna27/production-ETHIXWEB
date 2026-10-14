@@ -9,6 +9,7 @@ const BOTTOM_PADDING = 28;
 
 export function Rulers({ activeSection = "Intro" }: RulersProps) {
   const [windowHeight, setWindowHeight] = useState(900);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const isDraggingRef = useRef(false);
@@ -17,6 +18,7 @@ export function Rulers({ activeSection = "Intro" }: RulersProps) {
   useEffect(() => {
     const handleResize = () => {
       setWindowHeight(window.innerHeight);
+      setIsDesktop(window.innerWidth >= 768);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -109,45 +111,47 @@ export function Rulers({ activeSection = "Intro" }: RulersProps) {
   return (
     <>
       {/* Left Vertical Ruler (Static Reference Scale - hidden on mobile for clean breathing room) */}
-      <aside
-        aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 bottom-0 z-30 select-none hidden md:block w-10 sm:w-12 overflow-hidden opacity-60 dark:opacity-75 transition-opacity duration-300"
-      >
-        <svg
-          className="h-full w-full"
-          preserveAspectRatio="none"
-          viewBox={`0 0 48 ${windowHeight}`}
-          xmlns="http://www.w3.org/2000/svg"
+      {isDesktop && (
+        <aside
+          aria-hidden="true"
+          className="pointer-events-none fixed left-0 top-0 bottom-0 z-30 select-none hidden md:block w-10 sm:w-12 overflow-hidden opacity-60 dark:opacity-75 transition-opacity duration-300"
         >
-          {ticks.map(({ y, isMajor, isMid, label }) => {
-            if (y > windowHeight) return null;
-            const tickWidth = isMajor ? 10 : isMid ? 6 : 3;
-            return (
-              <g key={`left-tick-${y}`}>
-                <line
-                  x1={0}
-                  y1={y}
-                  x2={tickWidth}
-                  y2={y}
-                  stroke="currentColor"
-                  strokeWidth={isMajor ? 1 : 0.75}
-                  className={isMajor ? "text-ink/40 dark:text-ink/50" : "text-ink/15 dark:text-ink/25"}
-                />
-                {isMajor && (
-                  <text
-                    x={tickWidth + 5}
-                    y={y + 3}
-                    textAnchor="start"
-                    className="fill-ink/45 dark:fill-ink/55 font-mono text-[9px] tracking-tighter"
-                  >
-                    {label}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </aside>
+          <svg
+            className="h-full w-full"
+            preserveAspectRatio="none"
+            viewBox={`0 0 48 ${windowHeight}`}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {ticks.map(({ y, isMajor, isMid, label }) => {
+              if (y > windowHeight) return null;
+              const tickWidth = isMajor ? 10 : isMid ? 6 : 3;
+              return (
+                <g key={`left-tick-${y}`}>
+                  <line
+                    x1={0}
+                    y1={y}
+                    x2={tickWidth}
+                    y2={y}
+                    stroke="currentColor"
+                    strokeWidth={isMajor ? 1 : 0.75}
+                    className={isMajor ? "text-ink/40 dark:text-ink/50" : "text-ink/15 dark:text-ink/25"}
+                  />
+                  {isMajor && (
+                    <text
+                      x={tickWidth + 5}
+                      y={y + 3}
+                      textAnchor="start"
+                      className="fill-ink/45 dark:fill-ink/55 font-mono text-[9px] tracking-tighter"
+                    >
+                      {label}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+        </aside>
+      )}
 
       {/* Right Vertical Ruler (Interactive Draggable Scrollbar Track) */}
       <div
